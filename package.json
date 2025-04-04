@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "hono-react-vercel-app",
   "private": true,
   "scripts": {
     "build": "turbo run build",
