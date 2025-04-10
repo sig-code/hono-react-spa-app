@@ -1,0 +1,8 @@
+/* グローバルなCSSスタイル */
+body, html {
+  font-family: 'M PLUS Rounded 1c', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, select, option {
+  font-family: 'M PLUS Rounded 1c', sans-serif !important;
+}
