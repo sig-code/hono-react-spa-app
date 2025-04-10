@@ -1,4 +1,5 @@
-import { Todo } from "shared";
+import { Todo } from "./types";
+import { Button } from "@repo/ui";
 
 type TodoItemProps = {
   todo: Todo;
@@ -8,19 +9,28 @@ type TodoItemProps = {
 
 export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
-    <li style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
+    <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
       <input
         type="checkbox"
         checked={todo.completed}
         onChange={() => onToggle(todo.id)}
+        style={{ marginRight: "10px" }}
       />
       <span style={{
         textDecoration: todo.completed ? "line-through" : "none",
-        margin: "0 8px"
+        margin: "0 10px",
+        flexGrow: 1
       }}>
         {todo.text}
       </span>
-      <button onClick={() => onDelete(todo.id)}>削除</button>
+      <Button
+        color="warning"
+        variant="light"
+        size="xs"
+        onClick={() => onDelete(todo.id)}
+      >
+        削除
+      </Button>
     </li>
   );
 }

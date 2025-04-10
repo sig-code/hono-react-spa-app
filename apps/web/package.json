@@ -9,14 +9,21 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "shared": "workspace:*"
+    "@mantine/charts": "^7.17.4",
+    "@mantine/core": "^7.17.4",
+    "@mantine/dates": "^7.17.4",
+    "@repo/ui": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.2",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.3.4",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
     "typescript": "^5.8.3",
     "vite": "^6.2.6"
   }

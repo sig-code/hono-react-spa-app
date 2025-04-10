@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Todo } from "shared";
+import { Todo } from "./types";
 import { TodoItem } from "./TodoItem";
 import { TodoForm } from "./TodoForm";
+import { Card } from "@repo/ui";
 
 export function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -36,19 +37,21 @@ export function App() {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
-      <h1>Simple TODO App</h1>
-      <TodoForm onAdd={addTodo} />
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={toggleTodo}
-            onDelete={deleteTodo}
-          />
-        ))}
-      </ul>
+    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
+      <Card shadow="md" p="md" radius="md" withBorder>
+        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Simple TODO App</h1>
+        <TodoForm onAdd={addTodo} />
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggle={toggleTodo}
+              onDelete={deleteTodo}
+            />
+          ))}
+        </ul>
+      </Card>
     </div>
   );
 }
