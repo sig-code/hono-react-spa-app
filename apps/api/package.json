@@ -10,9 +10,11 @@
   "dependencies": {
     "hono": "^4.7.6",
     "@hono/node-server": "^1.14.0",
-    "shared": "workspace:*"
+    "@repo/ui": "workspace:*"
   },
   "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^20.17.30",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"

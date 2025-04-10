@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "colors": {
+      "primary": "#3894FF",
+      "warning": "#FF5252",
+      "background": {
+        "yellow": "#F7D666",
+        "white": "#FFFFFF",
+        "lightGray": "#EEEEEE"
+      },
+      "text": {
+        "dark": "#000000"
+      },
+      "accent": "#29C7C7"
+    },
+    "typography": {
+      "fontFamily": "M PLUS Rounded 1c, sans-serif",
+      "fontSource": "https://fonts.google.com/specimen/M+PLUS+Rounded+1c",
+      "weights": {
+        "medium": 500,
+        "bold": 700
+      }
+    },
+    "spacing": {
+      "base": "15px"
+    },
+    "borderRadius": {
+      "button": "5px"
+    },
+    "shadows": {
+      "default": {
+        "color": "#000000",
+        "opacity": "10%",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "10px"
+      }
+    }
+  }
+}
