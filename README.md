@@ -1,84 +1,87 @@
-# Turborepo starter
+# Hono + React SPA アプリケーション
 
-This Turborepo starter is maintained by the Turborepo core team.
+シンプルなTODOアプリケーションを実装したモノレポプロジェクトです。バックエンドにHono、フロントエンドにReact（Vite）を使用しています。
 
-## Using this example
+## 🚀 機能
 
-Run the following command:
+- TODOの追加、完了/未完了の切り替え、削除
+- バックエンドAPIとフロントエンドの連携
+- Turborepoによるモノレポ管理
+- Vercelへのデプロイ対応
 
-```sh
-npx create-turbo@latest
+## 📦 プロジェクト構成
+
+このプロジェクトは以下のアプリケーション/パッケージで構成されています：
+
+### アプリケーション
+
+- `apps/api`: [Hono](https://hono.dev/)を使用したバックエンドAPI
+- `apps/web`: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)を使用したフロントエンドSPA
+
+### パッケージ
+
+- `packages/ui`: 共有UIコンポーネントライブラリ
+- `packages/shared`: 型定義などの共有リソース
+
+## 🛠️ 開発環境のセットアップ
+
+### 必要条件
+
+- Node.js 18以上
+- pnpm 8以上
+
+### インストール
+
+```bash
+# 依存関係のインストール
+pnpm install
 ```
 
-## What's inside?
+### 開発サーバーの起動
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
+```bash
+# すべてのアプリケーションを同時に起動
 pnpm dev
+
+# 個別に起動する場合
+pnpm --filter api dev  # APIサーバーのみ
+pnpm --filter web dev  # フロントエンドのみ
 ```
 
-### Remote Caching
+開発サーバーを起動すると、以下のURLでアクセスできます：
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+- フロントエンド: http://localhost:5173
+- APIサーバー: http://localhost:8787
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## 🔨 ビルド
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+```bash
+# すべてのアプリケーションをビルド
+pnpm build
 
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+# 個別にビルドする場合
+pnpm --filter api build  # APIサーバーのみ
+pnpm --filter web build  # フロントエンドのみ
 ```
 
-## Useful Links
+## 🚢 デプロイ
 
-Learn more about the power of Turborepo:
+このプロジェクトはVercelへのデプロイに対応しています。
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+### Vercelへのデプロイ
+
+1. Vercelアカウントを作成し、GitHubリポジトリと連携します
+2. 新しいプロジェクトを作成し、このリポジトリを選択します
+3. 必要に応じて環境変数を設定します
+4. デプロイボタンをクリックします
+
+## 🧪 テスト
+
+```bash
+# すべてのテストを実行
+pnpm test
+```
+
+## 📝 ライセンス
+
+MITライセンス
