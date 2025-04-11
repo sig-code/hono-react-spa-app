@@ -5,6 +5,6 @@ export interface TextInputProps extends MantineTextInputProps {
   // 追加のプロパティがあれば定義
 }
 
-export function TextInput(props: TextInputProps) {
-  return <MantineTextInput {...props} />;
+export function TextInput({ radius = 'md', ...props }: TextInputProps) {
+  return <MantineTextInput radius={radius} {...props} />;
 }

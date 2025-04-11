@@ -6,8 +6,23 @@ export interface CardProps extends MantineCardProps {
   withShadow?: boolean;
 }
 
-export function Card({ withBorder = true, withShadow = true, shadow = 'md', ...props }: CardProps) {
-  return <MantineCard withBorder={withBorder} shadow={withShadow ? shadow : undefined} {...props} />;
+export function Card({
+  withBorder = true,
+  withShadow = true,
+  shadow = 'md',
+  radius = 'md',
+  padding = 'md',
+  ...props
+}: CardProps) {
+  return (
+    <MantineCard
+      withBorder={withBorder}
+      shadow={withShadow ? shadow : undefined}
+      radius={radius}
+      padding={padding}
+      {...props}
+    />
+  );
 }
 
 // CardSectionもエクスポート
