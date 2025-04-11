@@ -3,14 +3,40 @@ import { Todo } from "./types";
 import { TodoItem } from "./TodoItem";
 import { TodoForm } from "./TodoForm";
 import { Card } from "@repo/ui";
+import ky from "ky";
+
+// kyのインスタンスを作成
+const api = ky.create({
+  // 公式推奨: prefixUrlを使用してベースURLを設定
+  prefixUrl: 'http://localhost:8787',
+  hooks: {
+    beforeRequest: [
+      request => {
+        console.log('Request:', request.url.toString(), request.method);
+      }
+    ],
+    afterResponse: [
+      (_request, _options, response) => {
+        console.log('Response:', response.url, response.status);
+        return response;
+      }
+    ]
+  }
+});
+
 
 export function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const fetchTodos = async () => {
-    const res = await fetch("/api/todos");
-    const data = await res.json();
-    setTodos(data.todos);
+    try {
+      console.log('Fetching todos...');
+      const data = await api.get('api/todos').json<{ todos: Todo[] }>();
+      console.log('Todos data:', data);
+      setTodos(data.todos || []);
+    } catch (error) {
+      console.error("Error fetching todos:", error);
+    }
   };
 
   useEffect(() => {
@@ -18,22 +44,36 @@ export function App() {
   }, []);
 
   const addTodo = async (text: string) => {
-    await fetch("/api/todos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-    fetchTodos();
+    try {
+      console.log('Adding todo:', text);
+      const response = await api.post('api/todos', {
+        json: { text }
+      });
+      console.log('Add todo response:', response.status);
+      const data = await response.json();
+      console.log('Add todo data:', data);
+      fetchTodos();
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    }
   };
 
   const toggleTodo = async (id: string) => {
-    await fetch(`/api/todos/${id}`, { method: "PUT" });
-    fetchTodos();
+    try {
+      await api.put(`api/todos/${id}`);
+      fetchTodos();
+    } catch (error) {
+      console.error("Error toggling todo:", error);
+    }
   };
 
   const deleteTodo = async (id: string) => {
-    await fetch(`/api/todos/${id}`, { method: "DELETE" });
-    fetchTodos();
+    try {
+      await api.delete(`api/todos/${id}`);
+      fetchTodos();
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
   };
 
   return (
