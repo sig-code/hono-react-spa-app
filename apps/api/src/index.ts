@@ -1,8 +1,8 @@
 import { serve } from "@hono/node-server";
 // Vercel用のhandleをインポート
 import { handle } from "@hono/node-server/vercel";
-import { Hono } from "hono";
 import { todosRouter } from "@src/todos.js";
+import { Hono } from "hono";
 import { cors } from "hono/cors";
 
 // シンプルなHonoアプリケーションの作成
@@ -10,7 +10,6 @@ const app = new Hono();
 app.use("/*", cors());
 
 // APIルートの設定
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const apiRoutes = app.route("/api/todos", todosRouter);
 
 // 開発環境ではローカルサーバーを起動

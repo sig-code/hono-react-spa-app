@@ -1,5 +1,5 @@
-import { Hono } from "hono";
 import type { Todo } from "@src/types/index.js";
+import { Hono } from "hono";
 
 // インメモリのTODOデータストア
 let todos: Todo[] = [];
