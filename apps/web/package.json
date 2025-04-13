@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint ."
+    "lint": "biome check ."
   },
   "dependencies": {
     "@mantine/charts": "^7.17.4",
@@ -19,7 +19,6 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

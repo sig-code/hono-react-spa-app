@@ -8,7 +8,7 @@
     "./*": "./src/*.tsx"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "biome check .",
     "build": "tsc"
   },
   "dependencies": {
@@ -24,7 +24,6 @@
     "recharts": "2.15.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
