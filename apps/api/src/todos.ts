@@ -1,4 +1,4 @@
-import type { Todo } from "@src/types/index.js";
+import type { Todo } from "@src/types/index";
 import { Hono } from "hono";
 
 // インメモリのTODOデータストア
