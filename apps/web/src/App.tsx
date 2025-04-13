@@ -1,41 +1,28 @@
 import { useEffect, useState } from "react";
-import { Todo } from "@src/types";
 import { TodoItem } from "@src/TodoItem";
 import { TodoForm } from "@src/TodoForm";
 import { Card } from "@repo/ui";
-import ky from "ky";
-
-// kyのインスタンスを作成
-const api = ky.create({
-  // 公式推奨: prefixUrlを使用してベースURLを設定
-  prefixUrl: 'http://localhost:8787',
-  hooks: {
-    beforeRequest: [
-      request => {
-        console.log('Request:', request.url.toString(), request.method);
-      }
-    ],
-    afterResponse: [
-      (_request, _options, response) => {
-        console.log('Response:', response.url, response.status);
-        return response;
-      }
-    ]
-  }
-});
-
+import { api } from "@src/api/client";
+import type { Todo } from "@src/types";
 
 export function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchTodos = async () => {
     try {
-      console.log('Fetching todos...');
-      const data = await api.get('api/todos').json<{ todos: Todo[] }>();
-      console.log('Todos data:', data);
+      setLoading(true);
+      setError(null);
+      console.log('TODOを取得中...');
+      const data = await api.getTodos();
+      console.log('TODOデータ:', data);
       setTodos(data.todos || []);
     } catch (error) {
-      console.error("Error fetching todos:", error);
+      console.error("TODOの取得に失敗したよ！", error);
+      setError(error instanceof Error ? error.message : "不明なエラーが発生したよ！");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,52 +32,77 @@ export function App() {
 
   const addTodo = async (text: string) => {
     try {
-      console.log('Adding todo:', text);
-      const response = await api.post('api/todos', {
-        json: { text }
-      });
-      console.log('Add todo response:', response.status);
-      const data = await response.json();
-      console.log('Add todo data:', data);
-      fetchTodos();
+      setError(null);
+      console.log('TODOを追加中:', text);
+      const data = await api.createTodo(text);
+      console.log('TODOが追加されたよ！', data);
+      setTodos(data.todos || []);
     } catch (error) {
-      console.error("Error adding todo:", error);
+      console.error("TODOの追加に失敗したよ！", error);
+      setError(error instanceof Error ? error.message : "不明なエラーが発生したよ！");
     }
   };
 
   const toggleTodo = async (id: string) => {
     try {
-      await api.put(`api/todos/${id}`);
-      fetchTodos();
+      setError(null);
+      const data = await api.toggleTodo(id);
+      setTodos(data.todos || []);
     } catch (error) {
-      console.error("Error toggling todo:", error);
+      console.error("TODOの更新に失敗したよ！", error);
+      setError(error instanceof Error ? error.message : "不明なエラーが発生したよ！");
     }
   };
 
   const deleteTodo = async (id: string) => {
     try {
-      await api.delete(`api/todos/${id}`);
-      fetchTodos();
+      setError(null);
+      const data = await api.deleteTodo(id);
+      setTodos(data.todos || []);
     } catch (error) {
-      console.error("Error deleting todo:", error);
+      console.error("TODOの削除に失敗したよ！", error);
+      setError(error instanceof Error ? error.message : "不明なエラーが発生したよ！");
     }
   };
 
   return (
     <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
       <Card shadow="md" p="md" radius="md" withBorder>
-        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Simple TODO App</h1>
+        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>シンプルTODOアプリ</h1>
         <TodoForm onAdd={addTodo} />
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {todos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              onToggle={toggleTodo}
-              onDelete={deleteTodo}
-            />
-          ))}
-        </ul>
+
+        {error && (
+          <div style={{
+            padding: "10px",
+            marginBottom: "15px",
+            backgroundColor: "#ffebee",
+            color: "#c62828",
+            borderRadius: "5px"
+          }}>
+            {error}
+          </div>
+        )}
+
+        {loading ? (
+          <div style={{ textAlign: "center", padding: "20px" }}>読み込み中...</div>
+        ) : (
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            {todos.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "20px", color: "#757575" }}>
+                TODOがまだないよ！新しいTODOを追加してね！
+              </div>
+            ) : (
+              todos.map((todo) => (
+                <TodoItem
+                  key={todo.id}
+                  todo={todo}
+                  onToggle={toggleTodo}
+                  onDelete={deleteTodo}
+                />
+              ))
+            )}
+          </ul>
+        )}
       </Card>
     </div>
   );
