@@ -1,7 +1,7 @@
 {
-  // API固有の設定
   "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
   "extends": ["../../packages/biome-config/node.jsonc"],
-
-  // API固有の追加設定があればここに記述
+  "linter": {
+    "rules": {}
+  }
 }

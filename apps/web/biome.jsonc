@@ -1,6 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
   "extends": ["../../packages/biome-config/react.jsonc"],
-
-  // Web固有の追加設定があればここに記述
+  "linter": {
+    "rules": {}
+  }
 }
