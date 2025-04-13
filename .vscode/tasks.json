@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Biome: Format All Files",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["biome", "format", "--write", "."],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Biome: Lint All Files",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["biome", "lint", "."],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Biome: Check All Files",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["biome", "check", "--apply", "."],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}
