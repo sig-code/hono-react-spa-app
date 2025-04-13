@@ -1,19 +1,7 @@
 {
-  // ルートの設定を拡張
-  "extends": ["../../biome.jsonc"],
-
   // API固有の設定
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
+  "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+  "extends": ["../../packages/biome-config/node.jsonc"],
 
-  // TypeScriptの設定
-  "javascript": {
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
-    }
-  }
+  // API固有の追加設定があればここに記述
 }

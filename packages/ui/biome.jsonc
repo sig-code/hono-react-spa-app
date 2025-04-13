@@ -1,17 +1,6 @@
 {
-  "extends": ["../../biome.jsonc"],
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "a11y": {
-        "recommended": true
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "jsxQuoteStyle": "double"
-    }
-  }
+  "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+  "extends": ["../../packages/biome-config/react.jsonc"],
+
+  // UI固有の追加設定があればここに記述
 }

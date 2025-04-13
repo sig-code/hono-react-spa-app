@@ -1,12 +1,4 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
-  "extends": ["./packages/biome-config/biome.jsonc"],
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "ignore": ["node_modules", "dist", "build", ".turbo", "pnpm-lock.yaml"]
-  }
+  "extends": ["./packages/biome-config/base.jsonc"]
 }
