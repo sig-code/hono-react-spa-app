@@ -1,0 +1,12 @@
+{
+  "name": "@repo/biome-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./biome.jsonc"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.6.1"
+  }
+}
