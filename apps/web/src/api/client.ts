@@ -1,83 +1,83 @@
-import type { Todo, TodoListResponse } from '@src/types'
+import type { TodoListResponse } from "@src/types";
+import ky from "ky";
+import type { HTTPError } from "ky";
 
 // APIのベースURL
-const API_BASE_URL = 'http://localhost:8787'
+const API_BASE_URL = "http://localhost:8787";
 
-// エラーハンドリング用の関数
-const handleApiError = (error: unknown) => {
-  if (error instanceof Error) {
-    console.error('APIエラー:', error.message)
-    throw error
+// カスタムエラークラス
+export class ApiError extends Error {
+  status?: number;
+  response?: Response;
+
+  constructor(message: string, options?: { status?: number; response?: Response }) {
+    super(message);
+    this.name = "ApiError";
+    this.status = options?.status;
+    this.response = options?.response;
   }
-  console.error('不明なエラーが発生したよ！', error)
-  throw new Error('不明なエラーが発生したよ！')
 }
+
+// kyインスタンスの作成
+const apiClient = ky.create({
+  prefixUrl: API_BASE_URL,
+  timeout: 10000,
+  retry: {
+    limit: 2,
+    methods: ["get", "put", "post", "delete"],
+    statusCodes: [408, 413, 429, 500, 502, 503, 504],
+  },
+  hooks: {
+    beforeError: [
+      (error) => {
+        const { response } = error;
+
+        // レスポンスがある場合はステータスコードとメッセージを取得
+        if (response) {
+          const status = response.status;
+          const message = `APIエラー: ${status} ${response.statusText}`;
+          console.error(message);
+
+          // カスタムエラーに変換
+          const apiError = new ApiError(message, {
+            status,
+            response,
+          });
+
+          return apiError as unknown as HTTPError;
+        }
+
+        // ネットワークエラーなどレスポンスがない場合
+        console.error("APIエラー:", error.message);
+        return error;
+      },
+    ],
+  },
+});
 
 // APIリクエスト関数
 export const api = {
   // 全TODOの取得
   getTodos: async (): Promise<TodoListResponse> => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/todos`)
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'TODOの取得に失敗したよ！')
-      }
-      return await res.json()
-    } catch (error) {
-      return handleApiError(error)
-    }
+    return apiClient.get("api/todos").json<TodoListResponse>();
   },
 
   // 新規TODOの作成
   createTodo: async (text: string): Promise<TodoListResponse> => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/todos`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text }),
+    return apiClient
+      .post("api/todos", {
+        json: { text },
       })
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'TODOの作成に失敗したよ！')
-      }
-      return await res.json()
-    } catch (error) {
-      return handleApiError(error)
-    }
+      .json<TodoListResponse>();
   },
 
   // TODOの更新（完了状態の切り替え）
   toggleTodo: async (id: string): Promise<TodoListResponse> => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/todos/${id}`, {
-        method: 'PUT',
-      })
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'TODOの更新に失敗したよ！')
-      }
-      return await res.json()
-    } catch (error) {
-      return handleApiError(error)
-    }
+    return apiClient.put(`api/todos/${id}`).json<TodoListResponse>();
   },
 
   // TODOの削除
   deleteTodo: async (id: string): Promise<TodoListResponse> => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/todos/${id}`, {
-        method: 'DELETE',
-      })
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'TODOの削除に失敗したよ！')
-      }
-      return await res.json()
-    } catch (error) {
-      return handleApiError(error)
-    }
+    return apiClient.delete(`api/todos/${id}`).json<TodoListResponse>();
   },
-}
+};
