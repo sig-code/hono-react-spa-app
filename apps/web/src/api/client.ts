@@ -1,5 +1,3 @@
-import { hc } from "hono/client";
-import type { AppType } from "../../../api/src/index";
 import type { Todo, TodoListResponse } from "@src/types";
 
 // APIのベースURL
