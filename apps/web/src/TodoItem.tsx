@@ -1,4 +1,4 @@
-import { Todo } from "./types";
+import { Todo } from "@src/types";
 import { Button } from "@repo/ui";
 
 type TodoItemProps = {

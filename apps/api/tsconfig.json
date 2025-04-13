@@ -1,7 +1,12 @@
 {
   "extends": "@repo/typescript-config/node.json",
   "compilerOptions": {
-    "module": "NodeNext"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"]
+    }
   },
   "include": ["src"]
 }

@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { todosRouter } from "./todos";
+import { todosRouter } from "@src/todos.js";
 import { serve } from "@hono/node-server";
 // Vercel用のhandleをインポート
 import { handle } from "@hono/node-server/vercel";

@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "./App";
+import { App } from "@src/App";
 import { MantineProvider } from "@repo/ui";
 
 // グローバルCSSをインポート
-import "./global.css";
+import "@src/global.css";
 
 // Mantineのスタイルは@repo/uiから自動的にインポートされます
 

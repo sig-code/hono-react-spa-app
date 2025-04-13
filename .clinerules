@@ -1,4 +1,12 @@
 {
+  "packageManager": {
+    "type": "pnpm",
+    "version": "10.8.0",
+    "monorepo": {
+      "type": "turborepo",
+      "workspaces": ["apps/*", "packages/*"]
+    }
+  },
   "brand": {
     "colors": {
       "primary": "#3894FF",

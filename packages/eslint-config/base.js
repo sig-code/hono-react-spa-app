@@ -1,19 +1,14 @@
-/** @type {import('eslint').Linter.Config} */
-export default {
-  extends: [
-    'eslint:recommended',
-    'prettier'
-  ],
-  env: {
-    node: true,
-    es2022: true
-  },
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
-  rules: {
-    'no-unused-vars': 'warn',
-    'no-console': ['warn', { allow: ['warn', 'error'] }]
-  }
-};
+import js from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
+import tseslint from "typescript-eslint";
+
+/**
+ * 共有の ESLint 設定
+ *
+ * @type {import("eslint").Linter.Config[]}
+ * */
+export const BaseConfig = [
+  js.configs.recommended,
+  eslintConfigPrettier,
+  ...tseslint.configs.recommended,
+];

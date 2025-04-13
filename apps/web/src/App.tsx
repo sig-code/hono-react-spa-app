@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Todo } from "./types";
-import { TodoItem } from "./TodoItem";
-import { TodoForm } from "./TodoForm";
+import { Todo } from "@src/types";
+import { TodoItem } from "@src/TodoItem";
+import { TodoForm } from "@src/TodoForm";
 import { Card } from "@repo/ui";
 import ky from "ky";
 
