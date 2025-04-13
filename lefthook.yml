@@ -1,0 +1,10 @@
+# lefthook.yml
+pre-commit:
+  parallel: true
+  commands:
+    biome-check:
+      glob: "*.{js,jsx,ts,tsx,json,jsonc}"
+      run: pnpm biome check {staged_files}
+    biome-format:
+      glob: "*.{js,jsx,ts,tsx,json,jsonc}"
+      run: pnpm biome format --write {staged_files}

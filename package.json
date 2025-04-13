@@ -8,10 +8,12 @@
     "format": "biome format --write .",
     "check-types": "turbo run check-types",
     "check": "biome check .",
-    "check:apply": "biome check --apply ."
+    "check:apply": "biome check --apply .",
+    "lefthook": "lefthook run pre-commit"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
+    "lefthook": "^1.11.9",
     "turbo": "^2.5.0",
     "typescript": "5.8.3"
   },
