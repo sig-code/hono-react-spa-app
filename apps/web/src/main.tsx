@@ -1,17 +1,22 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "@src/App";
-import { MantineProvider } from "@repo/ui";
+import { MantineProvider } from '@repo/ui'
+import { App } from '@src/App'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 
 // グローバルCSSをインポート
-import "@src/global.css";
+import '@src/global.css'
 
 // Mantineのスタイルは@repo/uiから自動的にインポートされます
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById('root')
+if (!rootElement) {
+  throw new Error('Root element not found')
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <MantineProvider>
       <App />
     </MantineProvider>
-  </StrictMode>
-);
+  </StrictMode>,
+)

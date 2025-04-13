@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card as MantineCard, CardProps as MantineCardProps, CardSection } from '@mantine/core';
+import { CardSection, Card as MantineCard, type CardProps as MantineCardProps } from '@mantine/core'
+import React from 'react'
 
 export interface CardProps extends MantineCardProps {
-  withBorder?: boolean;
-  withShadow?: boolean;
+  withBorder?: boolean
+  withShadow?: boolean
 }
 
 export function Card({
@@ -22,8 +22,8 @@ export function Card({
       padding={padding}
       {...props}
     />
-  );
+  )
 }
 
 // CardSectionもエクスポート
-export { CardSection };
+export { CardSection }

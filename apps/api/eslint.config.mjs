@@ -1,9 +1,8 @@
-
-import honoConfig from '../../packages/eslint-config/hono.js';
-import tseslint from 'typescript-eslint';
+import tseslint from 'typescript-eslint'
+import honoConfig from '../../packages/eslint-config/hono.js'
 
 // 基本設定をインポート
-const baseConfig = honoConfig;
+const baseConfig = honoConfig
 
 // TypeScriptの型情報を使用するための設定を追加
 export default [
@@ -17,4 +16,4 @@ export default [
       },
     },
   },
-];
+]

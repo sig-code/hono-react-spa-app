@@ -1,185 +1,182 @@
-import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import type {
-  Todo} from "@src/schemas/todo.js";
+import { OpenAPIHono, createRoute } from '@hono/zod-openapi'
+import type { Todo } from '@src/schemas/todo.js'
 import {
-  todoListResponseSchema,
   createTodoSchema,
+  errorResponseSchema,
   todoIdParamSchema,
-  errorResponseSchema
-} from "@src/schemas/todo.js";
-import type { Context } from "hono";
+  todoListResponseSchema,
+} from '@src/schemas/todo.js'
+import type { Context } from 'hono'
 
 // インメモリのTODOデータストア
-let todos: Todo[] = [];
+let todos: Todo[] = []
 
 // エラーハンドリング用のミドルウェア
 const errorHandler = async (c: Context, next: () => Promise<void>) => {
   try {
-    await next();
+    await next()
   } catch (e: unknown) {
     if (e instanceof Error) {
-      return c.json({ error: e.message }, 400);
+      return c.json({ error: e.message }, 400)
     }
-    return c.json({ error: "不明なエラーが発生したよ！" }, 500);
+    return c.json({ error: '不明なエラーが発生したよ！' }, 500)
   }
-};
+}
 
 // OpenAPIルート定義
 // 全TODOの取得
 const getAllTodosRoute = createRoute({
-  method: "get",
-  path: "/",
+  method: 'get',
+  path: '/',
   responses: {
     200: {
       content: {
-        "application/json": {
-          schema: todoListResponseSchema
-        }
+        'application/json': {
+          schema: todoListResponseSchema,
+        },
       },
-      description: "全てのTODOを取得"
-    }
+      description: '全てのTODOを取得',
+    },
   },
-  tags: ["todos"]
-});
+  tags: ['todos'],
+})
 
 // 新規TODOの作成
 const createTodoRoute = createRoute({
-  method: "post",
-  path: "/",
+  method: 'post',
+  path: '/',
   request: {
     body: {
       content: {
-        "application/json": {
-          schema: createTodoSchema
-        }
+        'application/json': {
+          schema: createTodoSchema,
+        },
       },
-      required: true
-    }
+      required: true,
+    },
   },
   responses: {
     201: {
       content: {
-        "application/json": {
-          schema: todoListResponseSchema
-        }
+        'application/json': {
+          schema: todoListResponseSchema,
+        },
       },
-      description: "新規TODOを作成"
+      description: '新規TODOを作成',
     },
     400: {
       content: {
-        "application/json": {
-          schema: errorResponseSchema
-        }
+        'application/json': {
+          schema: errorResponseSchema,
+        },
       },
-      description: "バリデーションエラー"
-    }
+      description: 'バリデーションエラー',
+    },
   },
-  tags: ["todos"]
-});
+  tags: ['todos'],
+})
 
 // TODOの更新（完了状態の切り替え）
 const updateTodoRoute = createRoute({
-  method: "put",
-  path: "/{id}",
+  method: 'put',
+  path: '/{id}',
   request: {
-    params: todoIdParamSchema
+    params: todoIdParamSchema,
   },
   responses: {
     200: {
       content: {
-        "application/json": {
-          schema: todoListResponseSchema
-        }
+        'application/json': {
+          schema: todoListResponseSchema,
+        },
       },
-      description: "TODOを更新"
+      description: 'TODOを更新',
     },
     404: {
       content: {
-        "application/json": {
-          schema: errorResponseSchema
-        }
+        'application/json': {
+          schema: errorResponseSchema,
+        },
       },
-      description: "指定されたTODOが見つからない"
-    }
+      description: '指定されたTODOが見つからない',
+    },
   },
-  tags: ["todos"]
-});
+  tags: ['todos'],
+})
 
 // TODOの削除
 const deleteTodoRoute = createRoute({
-  method: "delete",
-  path: "/{id}",
+  method: 'delete',
+  path: '/{id}',
   request: {
-    params: todoIdParamSchema
+    params: todoIdParamSchema,
   },
   responses: {
     200: {
       content: {
-        "application/json": {
-          schema: todoListResponseSchema
-        }
+        'application/json': {
+          schema: todoListResponseSchema,
+        },
       },
-      description: "TODOを削除"
+      description: 'TODOを削除',
     },
     404: {
       content: {
-        "application/json": {
-          schema: errorResponseSchema
-        }
+        'application/json': {
+          schema: errorResponseSchema,
+        },
       },
-      description: "指定されたTODOが見つからない"
-    }
+      description: '指定されたTODOが見つからない',
+    },
   },
-  tags: ["todos"]
-});
+  tags: ['todos'],
+})
 
 // OpenAPIHonoルーターの作成
-const router = new OpenAPIHono();
+const router = new OpenAPIHono()
 
 // 全TODOの取得
 router.openapi(getAllTodosRoute, (c) => {
-  return c.json({ todos }, 200);
-});
+  return c.json({ todos }, 200)
+})
 
 // 新規TODOの作成
 router.openapi(createTodoRoute, (c) => {
-  const { text } = c.req.valid("json");
-  const newTodo: Todo = { id: Date.now().toString(), text, completed: false };
-  todos.push(newTodo);
-  return c.json({ todos }, 201);
-});
+  const { text } = c.req.valid('json')
+  const newTodo: Todo = { id: Date.now().toString(), text, completed: false }
+  todos.push(newTodo)
+  return c.json({ todos }, 201)
+})
 
 // TODOの更新（完了状態の切り替え）
 router.openapi(updateTodoRoute, (c) => {
-  const { id } = c.req.valid("param");
-  const todoIndex = todos.findIndex(todo => todo.id === id);
+  const { id } = c.req.valid('param')
+  const todoIndex = todos.findIndex((todo) => todo.id === id)
 
   if (todoIndex === -1) {
-    return c.json({ error: "指定されたTODOが見つからないよ！" }, 404);
+    return c.json({ error: '指定されたTODOが見つからないよ！' }, 404)
   }
 
-  todos = todos.map((todo) =>
-    todo.id === id ? { ...todo, completed: !todo.completed } : todo
-  );
+  todos = todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
 
-  return c.json({ todos }, 200);
-});
+  return c.json({ todos }, 200)
+})
 
 // TODOの削除
 router.openapi(deleteTodoRoute, (c) => {
-  const { id } = c.req.valid("param");
-  const todoIndex = todos.findIndex(todo => todo.id === id);
+  const { id } = c.req.valid('param')
+  const todoIndex = todos.findIndex((todo) => todo.id === id)
 
   if (todoIndex === -1) {
-    return c.json({ error: "指定されたTODOが見つからないよ！" }, 404);
+    return c.json({ error: '指定されたTODOが見つからないよ！' }, 404)
   }
 
-  todos = todos.filter((todo) => todo.id !== id);
-  return c.json({ todos }, 200);
-});
+  todos = todos.filter((todo) => todo.id !== id)
+  return c.json({ todos }, 200)
+})
 
 // エラーハンドリングミドルウェアを適用
-export const todosRouter = router.use(errorHandler);
+export const todosRouter = router.use(errorHandler)
 
 // RPC用の型をエクスポート
-export type TodosRouterType = typeof todosRouter;
+export type TodosRouterType = typeof todosRouter

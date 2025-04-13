@@ -1,16 +1,16 @@
-import React from 'react';
-import { DatePickerInput } from '@mantine/dates';
+import { DatePickerInput } from '@mantine/dates'
+import type React from 'react'
 
 // シンプルな型定義
 export interface DatePickerProps {
-  label?: string;
-  placeholder?: string;
-  value?: Date | null;
-  onChange?: (value: Date | null) => void;
-  required?: boolean;
-  disabled?: boolean;
-  className?: string;
-  style?: React.CSSProperties;
+  label?: string
+  placeholder?: string
+  value?: Date | null
+  onChange?: (value: Date | null) => void
+  required?: boolean
+  disabled?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 // シンプルなラッパーコンポーネント
@@ -22,7 +22,7 @@ export function DatePicker({
   required,
   disabled,
   className,
-  style
+  style,
 }: DatePickerProps) {
   return (
     <DatePickerInput
@@ -37,5 +37,5 @@ export function DatePicker({
       className={className}
       style={style}
     />
-  );
+  )
 }

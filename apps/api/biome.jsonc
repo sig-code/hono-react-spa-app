@@ -1,0 +1,19 @@
+{
+  // ルートの設定を拡張
+  "extends": ["../../biome.jsonc"],
+
+  // API固有の設定
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+
+  // TypeScriptの設定
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  }
+}
