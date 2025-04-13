@@ -1,13 +1,13 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { Context } from "hono";
+import type {
+  Todo} from "@src/schemas/todo.js";
 import {
-  Todo,
-  todoSchema,
   todoListResponseSchema,
   createTodoSchema,
   todoIdParamSchema,
   errorResponseSchema
 } from "@src/schemas/todo.js";
+import type { Context } from "hono";
 
 // インメモリのTODOデータストア
 let todos: Todo[] = [];
@@ -16,7 +16,7 @@ let todos: Todo[] = [];
 const errorHandler = async (c: Context, next: () => Promise<void>) => {
   try {
     await next();
-  } catch (e: any) {
+  } catch (e: unknown) {
     if (e instanceof Error) {
       return c.json({ error: e.message }, 400);
     }
@@ -142,7 +142,7 @@ router.openapi(getAllTodosRoute, (c) => {
 });
 
 // 新規TODOの作成
-router.openapi(createTodoRoute, async (c) => {
+router.openapi(createTodoRoute, (c) => {
   const { text } = c.req.valid("json");
   const newTodo: Todo = { id: Date.now().toString(), text, completed: false };
   todos.push(newTodo);
@@ -150,7 +150,7 @@ router.openapi(createTodoRoute, async (c) => {
 });
 
 // TODOの更新（完了状態の切り替え）
-router.openapi(updateTodoRoute, async (c) => {
+router.openapi(updateTodoRoute, (c) => {
   const { id } = c.req.valid("param");
   const todoIndex = todos.findIndex(todo => todo.id === id);
 

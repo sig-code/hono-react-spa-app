@@ -1,9 +1,9 @@
-export type Todo = {
+export interface Todo {
   id: string;
   text: string;
   completed: boolean;
-};
+}
 
-export type TodoResponse = {
+export interface TodoResponse {
   todos: Todo[];
-};
+}

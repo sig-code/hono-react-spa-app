@@ -1,17 +1,18 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
-import { cors } from "hono/cors";
-import { todosRouter, TodosRouterType } from "@src/todos.js";
 import { serve } from "@hono/node-server";
 // Vercel用のhandleをインポート
 import { handle } from "@hono/node-server/vercel";
 // Swagger UIをインポート
 import { swaggerUI } from "@hono/swagger-ui";
+import { OpenAPIHono } from "@hono/zod-openapi";
+import { todosRouter } from "@src/todos.js";
+import { cors } from "hono/cors";
 
 // OpenAPIHonoアプリケーションの作成
 const app = new OpenAPIHono();
 app.use("/*", cors());
 
 // APIルートの設定
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const apiRoutes = app.route("/api/todos", todosRouter);
 
 // OpenAPIドキュメントエンドポイントの設定
