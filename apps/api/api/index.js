@@ -2,4 +2,4 @@
 // このファイルはビルド時にdistディレクトリにコピーされる
 
 // ESMモジュールとして動作するように設定
-export * from "../apps/api/dist/index.js";
+export * from "./dist/index.js";
