@@ -1,16 +1,16 @@
 {
-	"extends": "@repo/typescript-config/react.json",
-	"compilerOptions": {
-		"useDefineForClassFields": true,
-		"moduleResolution": "bundler",
-		"resolveJsonModule": true,
-		"noFallthroughCasesInSwitch": true,
-		"noEmit": true,
-		"baseUrl": ".",
-		"paths": {
-			"@src/*": ["./src/*"]
-		}
-	},
-	"include": ["src"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+  "extends": "@repo/typescript-config/react.json",
+  "compilerOptions": {
+    "useDefineForClassFields": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

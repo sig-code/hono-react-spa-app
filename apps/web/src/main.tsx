@@ -10,13 +10,13 @@ import "@src/global.css";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
-	throw new Error("Root element not found");
+  throw new Error("Root element not found");
 }
 
 createRoot(rootElement).render(
-	<StrictMode>
-		<MantineProvider>
-			<App />
-		</MantineProvider>
-	</StrictMode>,
+  <StrictMode>
+    <MantineProvider>
+      <App />
+    </MantineProvider>
+  </StrictMode>,
 );

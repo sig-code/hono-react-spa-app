@@ -13,13 +13,13 @@ const apiRoutes = app.route("/api/todos", todosRouter);
 
 // 開発環境ではローカルサーバーを起動
 if (process.env.NODE_ENV !== "production") {
-	console.log("🚀 Server is starting on http://localhost:8787");
-	serve({
-		fetch: app.fetch,
-		port: 8787,
-	});
-	console.log("🚀 Server is running on http://localhost:8787");
-	console.log("📚 API Endpoint: http://localhost:8787/api/todos");
+  console.log("🚀 Server is starting on http://localhost:8787");
+  serve({
+    fetch: app.fetch,
+    port: 8787,
+  });
+  console.log("🚀 Server is running on http://localhost:8787");
+  console.log("📚 API Endpoint: http://localhost:8787/api/todos");
 }
 
 // Vercel用のエクスポート
