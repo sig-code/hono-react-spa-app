@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm build && cp -r dist/apps/web/* .",
+  "buildCommand": "pnpm build && ls -la && find . -name 'index.html' && cp -r ./dist/apps/web/* .",
   "outputDirectory": ".",
   "framework": "vite",
   "rewrites": [
