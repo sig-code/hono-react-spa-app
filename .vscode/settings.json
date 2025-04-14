@@ -19,6 +19,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
+  "[javascript][commonjs]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
   "biome.lspBin": "./node_modules/.bin/biome",
   "biome.enabled": true
 }

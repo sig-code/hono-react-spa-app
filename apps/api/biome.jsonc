@@ -3,5 +3,8 @@
   "extends": ["../../packages/biome-config/node.jsonc"],
   "linter": {
     "rules": {}
+  },
+  "files": {
+    "ignore": ["dist/**/*"]
   }
 }
