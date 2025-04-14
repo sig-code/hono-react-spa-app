@@ -13,6 +13,10 @@ export default defineConfig({
       "@repo": path.resolve(__dirname, "../../packages"),
     },
   },
+  build: {
+    outDir: "../../dist/apps/web",
+    emptyOutDir: true,
+  },
   server: {
     port: 5173,
     proxy: {

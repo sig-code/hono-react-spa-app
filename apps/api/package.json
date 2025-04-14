@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc && tsc-alias && mkdir -p dist/api && cp api/index.js dist/api/",
+    "build": "tsc && tsc-alias && mkdir -p ../../dist/api && cp -r api/* ../../dist/api/",
     "lint": "biome check --apply ."
   },
   "dependencies": {
