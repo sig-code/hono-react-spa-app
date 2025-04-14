@@ -1,12 +1,12 @@
 {
-  "extends": "@repo/typescript-config/node.json",
-  "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "baseUrl": ".",
-    "paths": {
-      "@src/*": ["src/*"]
-    }
-  },
-  "include": ["src"]
+	"extends": "@repo/typescript-config/node.json",
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"baseUrl": ".",
+		"paths": {
+			"@src/*": ["src/*"]
+		}
+	},
+	"include": ["src"]
 }
