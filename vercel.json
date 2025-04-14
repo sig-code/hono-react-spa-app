@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "name": "api",
   "buildCommand": "pnpm build && cp -r dist/apps/web/* .",
   "outputDirectory": ".",
   "framework": "vite",
