@@ -2,6 +2,12 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist/apps/web",
   "framework": "vite",
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs20.x",
+      "includeFiles": "dist/api/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/v3/(.*)",
