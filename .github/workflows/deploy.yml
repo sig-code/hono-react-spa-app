@@ -126,7 +126,7 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || '/api' }}
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL}}
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
           TURBO_REMOTE_ONLY: true
@@ -147,4 +147,4 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./
-          vercel-args: '--prod'
+          vercel-args: "--prod"
