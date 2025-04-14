@@ -9,8 +9,8 @@ const app = new Hono();
 app.use("/*", cors());
 
 // APIルートの設定
-// Vercelのサーバーレス関数として動作する場合、ルートパスは相対パスになる
-app.route("/todos", todosRouter);
+// 新しいパス形式 /api/v3/* に統一
+app.route("/api/v3/todos", todosRouter);
 
 // 開発環境ではローカルサーバーを起動
 if (process.env.NODE_ENV !== "production") {
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== "production") {
     port: 8787,
   });
   console.log("🚀 Server is running on http://localhost:8787");
-  console.log("📚 API Endpoint: http://localhost:8787/todos");
+  console.log("📚 API Endpoint: http://localhost:8787/api/v3/todos");
 }
 
 // Vercel用のエクスポート

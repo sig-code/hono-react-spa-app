@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "rewrites": [{ "source": "/api/v3/(.*)", "destination": "/api" }],
   "functions": {
     "api": {
       "memory": 128,

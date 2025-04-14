@@ -60,13 +60,13 @@ const apiClient = ky.create({
 export const api = {
   // 全TODOの取得
   getTodos: async (): Promise<TodoListResponse> => {
-    return apiClient.get("api/todos").json<TodoListResponse>();
+    return apiClient.get("api/v3/todos").json<TodoListResponse>();
   },
 
   // 新規TODOの作成
   createTodo: async (text: string): Promise<TodoListResponse> => {
     return apiClient
-      .post("api/todos", {
+      .post("api/v3/todos", {
         json: { text },
       })
       .json<TodoListResponse>();
@@ -74,11 +74,11 @@ export const api = {
 
   // TODOの更新（完了状態の切り替え）
   toggleTodo: async (id: string): Promise<TodoListResponse> => {
-    return apiClient.put(`api/todos/${id}`).json<TodoListResponse>();
+    return apiClient.put(`api/v3/todos/${id}`).json<TodoListResponse>();
   },
 
   // TODOの削除
   deleteTodo: async (id: string): Promise<TodoListResponse> => {
-    return apiClient.delete(`api/todos/${id}`).json<TodoListResponse>();
+    return apiClient.delete(`api/v3/todos/${id}`).json<TodoListResponse>();
   },
 };
