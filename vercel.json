@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm build",
-  "outputDirectory": "dist/apps/web",
+  "buildCommand": "pnpm build && cp -r dist/apps/web/* .",
+  "outputDirectory": ".",
   "framework": "vite",
   "functions": {
     "api/index.js": {
