@@ -2,10 +2,16 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "apps/web/dist",
   "framework": "vite",
+  "functions": {
+    "api": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
     {
       "source": "/api/v3/(.*)",
-      "destination": "/api/$1"
+      "destination": "/api"
     },
     {
       "source": "/(.*)",
