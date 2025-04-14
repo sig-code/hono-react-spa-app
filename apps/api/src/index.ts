@@ -9,7 +9,8 @@ const app = new Hono();
 app.use("/*", cors());
 
 // APIルートの設定
-const apiRoutes = app.route("/api/todos", todosRouter);
+// Vercelのサーバーレス関数として動作する場合、ルートパスは相対パスになる
+const apiRoutes = app.route("/", todosRouter);
 
 // 開発環境ではローカルサーバーを起動
 if (process.env.NODE_ENV !== "production") {

@@ -4,12 +4,22 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api"
+      "source": "/api/todos/(.*)",
+      "destination": "/api/todos/$1"
+    },
+    {
+      "source": "/api/todos",
+      "destination": "/api/todos"
     },
     {
       "source": "/(.*)",
       "destination": "/"
     }
-  ]
+  ],
+  "functions": {
+    "api/todos": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
 }

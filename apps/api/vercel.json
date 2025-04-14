@@ -1,9 +1,10 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/todos" }],
   "functions": {
-    "api": {
+    "api/todos": {
       "memory": 128,
       "maxDuration": 10
     }
-  }
+  },
+  "outputDirectory": "dist"
 }
