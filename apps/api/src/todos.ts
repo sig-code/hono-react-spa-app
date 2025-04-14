@@ -20,7 +20,11 @@ todo
     }),
     async (c) => {
       const { text } = await c.req.json();
-      const newTodo: Todo = { id: Date.now().toString(), text, completed: false };
+      const newTodo: Todo = {
+        id: Date.now().toString(),
+        text,
+        completed: false,
+      };
       todos.push(newTodo);
       return c.json({ todos }, 201);
     },
