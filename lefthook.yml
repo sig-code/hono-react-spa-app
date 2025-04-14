@@ -2,9 +2,6 @@
 pre-commit:
   parallel: true
   commands:
-    biome-check:
+    lint-format:
       glob: "*.{js,jsx,ts,tsx,json,jsonc,cjs}"
-      run: pnpm biome check {staged_files}
-    biome-format:
-      glob: "*.{js,jsx,ts,tsx,json,jsonc,cjs}"
-      run: pnpm biome format --write {staged_files}
+      run: pnpm biome check --apply {staged_files} && pnpm biome format --write {staged_files}

@@ -8,7 +8,7 @@
     "./*": "./src/*.tsx"
   },
   "scripts": {
-    "lint": "biome check .",
+    "lint": "biome check --apply .",
     "build": "tsc"
   },
   "dependencies": {

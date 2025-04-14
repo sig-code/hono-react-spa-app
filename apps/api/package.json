@@ -1,26 +1,26 @@
 {
-  "name": "api",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "lint": "biome check ."
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.14.0",
-    "@hono/swagger-ui": "^0.5.1",
-    "@hono/zod-openapi": "^0.19.4",
-    "@hono/zod-validator": "^0.4.3",
-    "@repo/ui": "workspace:*",
-    "hono": "^4.7.6",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
-    "@types/node": "^20.17.30",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
-  }
+	"name": "api",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"build": "tsc",
+		"lint": "biome check --apply ."
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.14.0",
+		"@hono/swagger-ui": "^0.5.1",
+		"@hono/zod-openapi": "^0.19.4",
+		"@hono/zod-validator": "^0.4.3",
+		"@repo/ui": "workspace:*",
+		"hono": "^4.7.6",
+		"zod": "^3.24.2"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "workspace:*",
+		"@types/node": "^20.17.30",
+		"tsx": "^4.19.3",
+		"typescript": "^5.8.3"
+	}
 }

@@ -4,11 +4,12 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
+    "lint": "biome check --apply . && turbo run lint",
     "format": "biome format --write .",
     "check-types": "turbo run check-types",
     "check": "biome check .",
     "check:apply": "biome check --apply .",
+    "lint-format": "biome check --apply . && biome format --write .",
     "lefthook": "lefthook run pre-commit"
   },
   "devDependencies": {
