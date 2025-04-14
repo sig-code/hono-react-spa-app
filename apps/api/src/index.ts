@@ -1,5 +1,4 @@
 import { serve } from "@hono/node-server";
-// Vercel用のhandleをインポート
 import { handle } from "@hono/node-server/vercel";
 import { todosRouter } from "@src/todos";
 import { Hono } from "hono";
