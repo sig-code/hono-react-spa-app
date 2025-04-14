@@ -1,15 +1,15 @@
 {
   "buildCommand": "pnpm build",
-  "outputDirectory": "dist",
+  "outputDirectory": "dist/apps/web",
   "framework": "vite",
   "rewrites": [
     {
       "source": "/api/v3/(.*)",
-      "destination": "/api/index.js"
+      "destination": "../api/index.js"
     },
     {
       "source": "/(.*)",
-      "destination": "/apps/web/$1"
+      "destination": "/$1"
     }
   ]
 }
