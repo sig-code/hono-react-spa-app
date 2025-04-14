@@ -2,11 +2,6 @@
   "buildCommand": "pnpm build && cp -r dist/apps/web/* .",
   "outputDirectory": ".",
   "framework": "vite",
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs@20.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/v3/(.*)",
