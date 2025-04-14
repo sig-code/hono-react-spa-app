@@ -89,12 +89,31 @@ pnpm --filter web build  # フロントエンドのみ
 
 このプロジェクトはVercelへのデプロイに対応しています。
 
-### Vercelへのデプロイ
+### Vercelへの手動デプロイ
 
 1. Vercelアカウントを作成し、GitHubリポジトリと連携します
 2. 新しいプロジェクトを作成し、このリポジトリを選択します
 3. 必要に応じて環境変数を設定します
 4. デプロイボタンをクリックします
+
+### GitHub Actionsによる自動デプロイ
+
+このプロジェクトはGitHub Actionsを使用した自動デプロイにも対応しています。mainブランチへのプッシュ時に自動的にVercelへデプロイされます。
+
+#### 設定手順
+
+1. Vercelでパーソナルアクセストークンを作成します
+   - Vercelのダッシュボード → Settings → Tokens から作成できます
+
+2. GitHubリポジトリのSecretsに以下の値を設定します
+   - `VERCEL_TOKEN`: 作成したVercelのパーソナルアクセストークン
+   - `VERCEL_ORG_ID`: VercelのOrganization ID
+   - `VERCEL_PROJECT_ID`: VercelのProject ID
+
+3. 必要に応じて、GitHubリポジトリのVariablesに環境変数を設定します
+   - `VITE_API_BASE_URL`: APIのベースURL（デフォルトは `/api`）
+
+これらの設定が完了すると、mainブランチへのプッシュ時に自動的にVercelへデプロイされます。
 
 ## 🧩 主要な技術スタック
 

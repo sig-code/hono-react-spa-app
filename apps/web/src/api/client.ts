@@ -3,7 +3,8 @@ import ky from "ky";
 import type { HTTPError } from "ky";
 
 // APIのベースURL
-const API_BASE_URL = "http://localhost:8787";
+// 環境変数から取得するか、デフォルト値を使用
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8787";
 
 // カスタムエラークラス
 export class ApiError extends Error {
