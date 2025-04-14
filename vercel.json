@@ -1,6 +1,6 @@
 {
   "buildCommand": "pnpm build",
-  "outputDirectory": "apps/web/dist",
+  "outputDirectory": "dist/apps/web",
   "framework": "vite",
   "functions": {
     "api/index.js": {
