@@ -10,7 +10,7 @@ app.use("/*", cors());
 
 // APIルートの設定
 // Vercelのサーバーレス関数として動作する場合、ルートパスは相対パスになる
-const apiRoutes = app.route("/", todosRouter);
+app.route("/todos", todosRouter);
 
 // 開発環境ではローカルサーバーを起動
 if (process.env.NODE_ENV !== "production") {
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== "production") {
     port: 8787,
   });
   console.log("🚀 Server is running on http://localhost:8787");
-  console.log("📚 API Endpoint: http://localhost:8787/api/todos");
+  console.log("📚 API Endpoint: http://localhost:8787/todos");
 }
 
 // Vercel用のエクスポート
@@ -31,6 +31,6 @@ export const DELETE = handle(app);
 export const PATCH = handle(app);
 
 // RPC用の型をエクスポート
-export type AppType = typeof apiRoutes;
+export type AppType = typeof app;
 
 export default app;
