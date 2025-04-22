@@ -31,7 +31,9 @@ todo
   )
   .put("/:id", (c) => {
     const id = c.req.param("id");
-    todos = todos.filter((todo) => todo.id !== id);
+    todos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
     return c.json({ todos });
   })
   .delete("/:id", (c) => {
