@@ -1,6 +1,5 @@
 {
-  "buildCommand": "pnpm build && ls -la && find . -name 'index.html' && cp -r ./dist/apps/web/* .",
-  "outputDirectory": ".",
+  "outputDirectory": "dist/apps/web",
   "framework": "vite",
   "rewrites": [
     {
@@ -11,5 +10,7 @@
       "source": "/(.*)",
       "destination": "/$1"
     }
-  ]
+  ],
+  "buildCommand": "pnpm run build && cd apps/api && pnpm run build:vercel",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./apps/web ./apps/api"
 }
