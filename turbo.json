@@ -1,23 +1,39 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
-  "globalEnv": ["VITE_API_BASE_URL", "NODEJS_HELPERS"],
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["VITE_API_BASE_URL", "NODEJS_HELPERS", "NODE_ENV", "VITE_ENV", "TURBO_ENV_MODE"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", "build/**", ".next/**", "!.next/cache/**"],
-      "env": ["VITE_API_BASE_URL", "NODEJS_HELPERS"]
+      "outputs": ["dist/**", ".next/**", "out/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
+    "build:staging": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "out/**"]
     },
-    "check-types": {
-      "dependsOn": ["^check-types"]
+    "build:prod": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "out/**"]
+    },
+    "build:vercel": {
+      "dependsOn": ["build"],
+      "outputs": ["api/**"]
     },
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "preview": {
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "type-check": {
+      "dependsOn": ["^type-check"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
     }
   }
 }

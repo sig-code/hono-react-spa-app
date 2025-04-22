@@ -26,6 +26,11 @@ coverage
 out/
 build
 dist
+api/
+**/*.js
+**/*.js.map
+**/*.d.ts
+**/*.d.ts.map
 
 
 # Debug

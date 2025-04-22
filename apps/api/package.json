@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc && tsc-alias && mkdir -p ../../api && cp -r api/* ../../api/ && cp -r dist/* ../../api/",
+    "build": "tsc && tsc-alias",
+    "build:staging": "NODE_ENV=staging tsc && tsc-alias",
+    "build:prod": "NODE_ENV=production tsc && tsc-alias",
+    "build:vercel": "tsc && tsc-alias && mkdir -p ../../api && cp -r dist/* ../../api/",
     "lint": "biome check --apply ."
   },
   "dependencies": {
